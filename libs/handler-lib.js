@@ -3,13 +3,10 @@ export default function handler(lambda) {
         return Promise.resolve()
             // Run the Lambda
             .then(() => lambda(event, context))
-            // On success
             .then((responseBody) => [200, responseBody])
-            // On failure
             .catch((e) => {
                 return [500, { error: e.message }];
             })
-            // Return HTTP response
             .then(([statusCode, body]) => ({
                 statusCode,
                 headers: {
